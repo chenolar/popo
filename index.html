@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Where is POPO?</title>
+    <script>document.documentElement.classList.add("is-loading");</script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-loader" id="pageLoader" role="status" aria-live="polite" aria-label="页面加载中">
+      <div class="page-loader-inner">
+        <div class="loader-logo" aria-hidden="true"></div>
+        <div class="loader-progress">
+          <span id="loaderProgressBar"></span>
+        </div>
+        <p id="loaderProgressText">0%</p>
+      </div>
+    </div>
+
+    <main class="journey" id="journey">
+      <section class="screen hero-screen" aria-label="POPO video intro">
+        <video class="hero-video" autoplay muted playsinline poster="assets/posters/pool.png">
+          <source src="assets/video/hero.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-logo" aria-label="POPO logo">
+          <img src="assets/logo/hero-logo.svg" alt="POPO" />
+        </div>
+        <div class="hero-bottom-mask is-revealed" id="heroReveal" aria-hidden="false">
+          <div class="hero-copy">
+            <h1 class="hero-title" data-split-text>Where is POPO?</h1>
+            <p class="hero-subtitle" data-split-text>POPO 在哪里？</p>
+          </div>
+          <button class="find-popo-button dark-callout" id="findPopoButton" type="button">
+            <span class="button-icon" aria-hidden="true"></span>
+            <span class="button-copy">
+              <strong>找到 POPO</strong>
+              <em>Find POPO</em>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen clue-screen" aria-label="POPO clues">
+        <aside class="player-turntable" id="playerTurntable" aria-live="polite">
+          <div class="glass-player" id="glassPlayer">
+            <button class="player-icon" type="button" aria-label="播放当前歌曲" aria-pressed="false">
+              <span></span>
+            </button>
+            <div>
+              <p>Song / Artist</p>
+              <h2 id="musicTitle">浪人的…</h2>
+              <span id="musicDesc">张震岳</span>
+            </div>
+            <div class="player-status" aria-hidden="true">
+              <svg class="cover-circular-text" viewBox="0 0 100 100">
+                <defs>
+                  <path
+                    id="coverCircularPath"
+                    d="M 50,50 m -39,0 a 39,39 0 1,1 78,0 a 39,39 0 1,1 -78,0"
+                  />
+                </defs>
+                <text>
+                  <textPath id="coverCircularText" href="#coverCircularPath" startOffset="0%"></textPath>
+                </text>
+              </svg>
+              <img id="playerCover" src="assets/covers/vinyl.jpg" alt="" />
+              <span></span>
+            </div>
+          </div>
+        </aside>
+
+        <div class="lyric-panel" id="lyricPanel" aria-live="polite">
+          <div class="generated-lyric" id="generatedLyric" data-text=""></div>
+          <p id="lyricMain">“这是你爱上我的，教会我的”</p>
+          <span id="lyricAccent">music</span>
+        </div>
+
+        <div class="clue-stage" aria-hidden="true"></div>
+
+        <div class="clue-window" aria-hidden="false">
+          <div class="clue-orbit" aria-label="POPO clue selector">
+            <button class="clue-object active" data-clue="vinyl" style="--arc-x: 0px; --arc-y: -282px; --r: 0deg; --arc-scale: 1.04; --arc-opacity: 1">
+              <span class="object-thumb object-thing-1"></span>
+              <strong>黑胶</strong>
+            </button>
+            <button class="clue-object" data-clue="headphone" style="--arc-x: 305px; --arc-y: -226px; --r: 10deg; --arc-scale: 1; --arc-opacity: 0.95">
+              <span class="object-thumb object-thing-2"></span>
+              <strong>耳机</strong>
+            </button>
+            <button class="clue-object" data-clue="pool" style="--arc-x: 520px; --arc-y: -72px; --r: 9deg; --arc-scale: 0.9; --arc-opacity: 0.82">
+              <span class="object-thumb object-thing-3"></span>
+              <strong>随身听</strong>
+            </button>
+            <button class="clue-object" data-clue="city" style="--arc-x: -305px; --arc-y: -226px; --r: -7deg; --arc-scale: 1; --arc-opacity: 0.95">
+              <span class="object-thumb object-thing-4"></span>
+              <strong>相机</strong>
+            </button>
+            <button class="clue-object" data-clue="walkman" style="--arc-x: -520px; --arc-y: -72px; --r: -8deg; --arc-scale: 0.9; --arc-opacity: 0.82">
+              <span class="object-thumb object-thing-5"></span>
+              <strong>收音机</strong>
+            </button>
+            <button class="clue-object" data-clue="cassette" style="--arc-x: -660px; --arc-y: 122px; --r: -4deg; --arc-scale: 0.74; --arc-opacity: 0.52">
+              <span class="object-thumb object-thing-6"></span>
+              <strong>汽水</strong>
+            </button>
+            <button class="clue-object" data-clue="speaker" style="--arc-x: 660px; --arc-y: 122px; --r: 8deg; --arc-scale: 0.74; --arc-opacity: 0.52">
+              <span class="object-thumb object-thing-7"></span>
+              <strong>音箱</strong>
+            </button>
+          </div>
+        </div>
+
+        <div class="clue-center">
+          <h1>popo 在这里吗？</h1>
+          <p>点击一件线索物，听一段可能属于 POPO 的音乐信号。</p>
+        </div>
+
+        <section class="chat-conversation" id="chatConversation" aria-live="polite" aria-label="POPO conversation">
+          <div class="chat-conversation-list" id="chatConversationList"></div>
+        </section>
+
+        <form class="clue-chat" id="clueChat" autocomplete="off">
+          <label class="sr-only" for="clueChatInput">发送给 POPO 的消息</label>
+          <input
+            id="clueChatInput"
+            name="message"
+            type="text"
+            maxlength="60"
+            placeholder="对 POPO 说点什么..."
+            enterkeyhint="send"
+          />
+          <button type="submit">发送</button>
+        </form>
+
+        <div class="screen-switcher" aria-label="Screen navigation">
+          <button class="switch-button dark-bubble" type="button" data-screen="0" aria-label="返回首屏">
+            <span class="switch-arrow">←</span>
+          </button>
+          <button class="switch-button dark-bubble" type="button" data-screen="2" aria-label="进入画报页">
+            <span class="switch-arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen photo-screen" aria-label="POPO photo wall">
+        <video class="photo-background-video" muted loop playsinline preload="none">
+          <source data-src="assets/video/photo-atmosphere.mp4" type="video/mp4" />
+        </video>
+        <div class="photo-background-shade" aria-hidden="true"></div>
+
+        <div class="photo-copy">
+          <p class="kicker">Track 03 / Photo Evidence</p>
+          <h1>POPO 出现过</h1>
+          <p>总是在临走前拍了相片，就留下证据再无法毁灭。</p>
+        </div>
+
+        <div class="polaroid-wall" aria-label="POPO photo carousel" tabindex="0">
+          <button class="polaroid" data-poster="assets/posters/pool.png" data-photo-index="0">
+            <img data-src="assets/posters/pool.png" alt="POPO pool poster" />
+            <span>Pool Vacation</span>
+          </button>
+          <button class="polaroid" data-poster="assets/posters/underwater.png" data-photo-index="1">
+            <img data-src="assets/posters/underwater.png" alt="POPO underwater poster" />
+            <span>Underwater Sound</span>
+          </button>
+          <button class="polaroid" data-poster="assets/posters/vinyl-room.png" data-photo-index="2">
+            <img data-src="assets/posters/vinyl-room.png" alt="POPO vinyl room poster" />
+            <span>Vinyl Room</span>
+          </button>
+          <button class="polaroid" data-poster="assets/posters/city.png" data-photo-index="3">
+            <img data-src="assets/posters/city.png" alt="POPO city poster" />
+            <span>City Signal</span>
+          </button>
+          <button class="polaroid" data-poster="assets/posters/retro-record-store.png" data-photo-index="4">
+            <img data-src="assets/posters/retro-record-store.png" alt="POPO in a retro record store" />
+            <span>Retro Record Store</span>
+          </button>
+          <button class="polaroid" data-poster="assets/posters/tokyo-beat-walk.png" data-photo-index="5">
+            <img data-src="assets/posters/tokyo-beat-walk.png" alt="POPO walking through Tokyo music streets" />
+            <span>Tokyo Beat Walk</span>
+          </button>
+          <button class="polaroid" data-poster="assets/posters/park-vinyl-day.png" data-photo-index="6">
+            <img data-src="assets/posters/park-vinyl-day.png" alt="POPO listening to vinyl in the park" />
+            <span>Park Vinyl Day</span>
+          </button>
+          <div class="photo-position" aria-hidden="true">
+            <span id="photoPositionCurrent">01</span>
+            <i></i>
+            <span id="photoPositionTotal">07</span>
+          </div>
+        </div>
+
+        <div class="screen-switcher" aria-label="Screen navigation">
+          <button class="switch-button dark-bubble" type="button" data-screen="1" aria-label="返回线索页">
+            <span class="switch-arrow">←</span>
+          </button>
+          <button class="switch-button dark-bubble" type="button" data-screen="0" aria-label="返回首屏">
+            <span class="switch-arrow">↗</span>
+          </button>
+        </div>
+
+        <footer class="social-finder">
+          <p>还可以在这里找到 POPO</p>
+          <div class="social-action">
+            <span class="social-coming-soon" role="status" aria-live="polite">尽情期待</span>
+            <a href="#" id="xiaohongshuLink" aria-label="Xiaohongshu">小红书</a>
+          </div>
+        </footer>
+      </section>
+    </main>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Poster preview">
+      <button type="button" id="closeLightbox" aria-label="Close preview">×</button>
+      <img src="" alt="" id="lightboxImage" />
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
