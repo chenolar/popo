@@ -1,0 +1,24 @@
+# Local preview helpers and generated checks
+.preview-*
+tmp/
+preview-*.png
+*-check.png
+clue-chat-check.png
+motion-reference-contact.png
+photo-screen-final-check.png
+reference-motion.mp4.mp4
+
+# Source/reference assets not used by the published page
+assets/character/
+assets/things/isolated/
+assets/things/contact-sheet.png
+assets/things/separation-qa.png
+assets/things/thing-*.png
+!assets/things/thing-*-web.png
+assets/things/thing-8-web.png
+assets/video/motion-reference.mp4
+assets/audio/README.txt
+
+# Local one-click publisher
+上线到GitHub.cmd
+GitHub分批上传-*/
