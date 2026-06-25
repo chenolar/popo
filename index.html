@@ -18,21 +18,25 @@
       </div>
     </div>
 
+    <div class="lyrics-lanyard-layer" id="lyricsLanyardLayer" aria-live="polite" aria-hidden="true"></div>
+
     <main class="journey" id="journey">
       <section class="screen hero-screen" aria-label="POPO video intro">
-        <video class="hero-video" autoplay muted playsinline poster="assets/posters/pool.png">
+        <video class="hero-video" autoplay muted loop playsinline poster="assets/posters/pool.webp">
           <source src="assets/video/hero.mp4" type="video/mp4" />
         </video>
         <div class="hero-logo" aria-label="POPO logo">
           <img src="assets/logo/hero-logo.svg" alt="POPO" />
         </div>
-        <div class="hero-bottom-mask is-revealed" id="heroReveal" aria-hidden="false">
+        <div class="hero-bottom-mask" id="heroReveal" aria-hidden="true">
           <div class="hero-copy">
             <h1 class="hero-title" data-split-text>Where is POPO?</h1>
             <p class="hero-subtitle" data-split-text>POPO 在哪里？</p>
           </div>
           <button class="find-popo-button dark-callout" id="findPopoButton" type="button">
-            <span class="button-icon" aria-hidden="true"></span>
+            <span class="button-icon" aria-hidden="true">
+              <img src="assets/logo/find-popo-icon.svg" alt="" />
+            </span>
             <span class="button-copy">
               <strong>找到 POPO</strong>
               <em>Find POPO</em>
@@ -156,32 +160,32 @@
         </div>
 
         <div class="polaroid-wall" aria-label="POPO photo carousel" tabindex="0">
-          <button class="polaroid" data-poster="assets/posters/pool.png" data-photo-index="0">
-            <img data-src="assets/posters/pool.png" alt="POPO pool poster" />
+          <button class="polaroid" data-poster="assets/posters/pool.webp" data-photo-index="0">
+            <img data-src="assets/posters/pool.webp" alt="POPO pool poster" />
             <span>Pool Vacation</span>
           </button>
-          <button class="polaroid" data-poster="assets/posters/underwater.png" data-photo-index="1">
-            <img data-src="assets/posters/underwater.png" alt="POPO underwater poster" />
+          <button class="polaroid" data-poster="assets/posters/underwater.webp" data-photo-index="1">
+            <img data-src="assets/posters/underwater.webp" alt="POPO underwater poster" />
             <span>Underwater Sound</span>
           </button>
-          <button class="polaroid" data-poster="assets/posters/vinyl-room.png" data-photo-index="2">
-            <img data-src="assets/posters/vinyl-room.png" alt="POPO vinyl room poster" />
+          <button class="polaroid" data-poster="assets/posters/vinyl-room.webp" data-photo-index="2">
+            <img data-src="assets/posters/vinyl-room.webp" alt="POPO vinyl room poster" />
             <span>Vinyl Room</span>
           </button>
-          <button class="polaroid" data-poster="assets/posters/city.png" data-photo-index="3">
-            <img data-src="assets/posters/city.png" alt="POPO city poster" />
+          <button class="polaroid" data-poster="assets/posters/city.webp" data-photo-index="3">
+            <img data-src="assets/posters/city.webp" alt="POPO city poster" />
             <span>City Signal</span>
           </button>
-          <button class="polaroid" data-poster="assets/posters/retro-record-store.png" data-photo-index="4">
-            <img data-src="assets/posters/retro-record-store.png" alt="POPO in a retro record store" />
+          <button class="polaroid" data-poster="assets/posters/retro-record-store.webp" data-photo-index="4">
+            <img data-src="assets/posters/retro-record-store.webp" alt="POPO in a retro record store" />
             <span>Retro Record Store</span>
           </button>
-          <button class="polaroid" data-poster="assets/posters/tokyo-beat-walk.png" data-photo-index="5">
-            <img data-src="assets/posters/tokyo-beat-walk.png" alt="POPO walking through Tokyo music streets" />
+          <button class="polaroid" data-poster="assets/posters/tokyo-beat-walk.webp" data-photo-index="5">
+            <img data-src="assets/posters/tokyo-beat-walk.webp" alt="POPO walking through Tokyo music streets" />
             <span>Tokyo Beat Walk</span>
           </button>
-          <button class="polaroid" data-poster="assets/posters/park-vinyl-day.png" data-photo-index="6">
-            <img data-src="assets/posters/park-vinyl-day.png" alt="POPO listening to vinyl in the park" />
+          <button class="polaroid" data-poster="assets/posters/park-vinyl-day.webp" data-photo-index="6">
+            <img data-src="assets/posters/park-vinyl-day.webp" alt="POPO listening to vinyl in the park" />
             <span>Park Vinyl Day</span>
           </button>
           <div class="photo-position" aria-hidden="true">

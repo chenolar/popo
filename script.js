@@ -29,6 +29,7 @@ const lightboxImage = document.querySelector("#lightboxImage");
 const closeLightbox = document.querySelector("#closeLightbox");
 const heroVideo = document.querySelector(".hero-video");
 const heroReveal = document.querySelector("#heroReveal");
+const lyricsLanyardLayer = document.querySelector("#lyricsLanyardLayer");
 const photoScreen = document.querySelector(".photo-screen");
 const photoBackgroundVideo = document.querySelector(".photo-background-video");
 const xiaohongshuLink = document.querySelector("#xiaohongshuLink");
@@ -128,6 +129,247 @@ const musicMap = {
   },
 };
 
+const lyricsDatabase = [
+  {
+    id: "s01",
+    title: "暗涌",
+    artist: "王菲",
+    emotion: "solitude",
+    lyrics: ["就算天空再深看不出裂痕", "眉头仍聚满密云", "害怕悲剧重演，我的命中命中"],
+  },
+  {
+    id: "s02",
+    title: "富士山下",
+    artist: "陈奕迅",
+    emotion: "emo",
+    lyrics: ["谁能凭爱意要富士山私有", "何不把悲哀当作自由", "情人节不要说穿，只敢抚你发端"],
+  },
+  {
+    id: "s03",
+    title: "Plastic Love",
+    artist: "竹内玛莉亚",
+    emotion: "chill",
+    lyrics: ["突然的雨让我停下脚步", "城市在霓虹中变得柔软", "把心事调成夜里的低速播放"],
+  },
+  {
+    id: "s04",
+    title: "ocean eyes",
+    artist: "Billie Eilish",
+    emotion: "float",
+    lyrics: ["I've been watching you for some time", "Can't stop staring at those ocean eyes", "Falling into your ocean eyes"],
+  },
+  {
+    id: "s05",
+    title: "暧昧",
+    artist: "王菲",
+    emotion: "night",
+    lyrics: ["眉目里似哭不似哭", "还祈求什么说不出", "陪着你天天在兜圈"],
+  },
+  {
+    id: "s06",
+    title: "倒带",
+    artist: "蔡依林",
+    emotion: "nostalgia",
+    lyrics: ["过去甜蜜在倒带", "我受够了等待", "回忆像旧磁带一样转回来"],
+  },
+  {
+    id: "s07",
+    title: "慢慢喜欢你",
+    artist: "莫文蔚",
+    emotion: "calm",
+    lyrics: ["慢慢喜欢你，慢慢地亲密", "慢慢聊自己，慢慢和你走在一起", "把晚风也调成温柔模式"],
+  },
+  {
+    id: "s08",
+    title: "后来",
+    artist: "刘若英",
+    emotion: "breakup",
+    lyrics: ["后来，我总算学会了如何去爱", "可惜你早已远去，消失在人海", "有些答案来得太晚"],
+  },
+  {
+    id: "s09",
+    title: "Sunset Rollercoaster",
+    artist: "落日飞车",
+    emotion: "chill",
+    lyrics: ["把黄昏放进口袋", "今天适合慢一点喜欢", "你的消息像汽水里的气泡"],
+  },
+  {
+    id: "s10",
+    title: "午夜漂流",
+    artist: "POPO Radio",
+    emotion: "float",
+    lyrics: ["别急着降落，云也会等你", "月光把心事照得很轻", "我们在夜色里短暂失重"],
+  },
+  {
+    id: "s11",
+    title: "房间里的雨",
+    artist: "POPO Radio",
+    emotion: "solitude",
+    lyrics: ["一个人的房间也会下雨", "灯没有坏，只是今晚太安静", "孤独像玻璃杯边缘的冷光"],
+  },
+  {
+    id: "s12",
+    title: "别回头看我",
+    artist: "POPO Radio",
+    emotion: "emo",
+    lyrics: ["我把想念按成静音", "你路过的风还没散", "算了，今晚先不做勇敢的人"],
+  },
+  {
+    id: "s13",
+    title: "无人电台",
+    artist: "POPO Radio",
+    emotion: "solitude",
+    lyrics: ["频道里只有雨声替我回答", "我把灯留给没有回来的人", "一个人的房间也会有回声"],
+  },
+  {
+    id: "s14",
+    title: "蓝色已读",
+    artist: "POPO Radio",
+    emotion: "emo",
+    lyrics: ["已读像一盏没有温度的灯", "我把话删掉，又把夜晚打开", "情绪在屏幕边缘轻轻碎掉"],
+  },
+  {
+    id: "s15",
+    title: "零点以后",
+    artist: "POPO Radio",
+    emotion: "night",
+    lyrics: ["零点以后，城市开始说真话", "月光把玻璃擦得很冷", "夜把所有声音调成低频"],
+  },
+  {
+    id: "s16",
+    title: "白噪音海岸",
+    artist: "POPO Radio",
+    emotion: "calm",
+    lyrics: ["风把焦虑吹成很小的浪", "慢一点，心会自己归位", "今晚适合把呼吸放轻"],
+  },
+  {
+    id: "s17",
+    title: "汽水黄昏",
+    artist: "POPO Radio",
+    emotion: "chill",
+    lyrics: ["气泡升起，烦恼下沉", "黄昏把耳机调成金色", "今天不用解释，也很好"],
+  },
+  {
+    id: "s18",
+    title: "云端失重",
+    artist: "POPO Radio",
+    emotion: "float",
+    lyrics: ["我在云层下面轻轻漂浮", "把重力暂时交给风", "心事悬停在离地三厘米"],
+  },
+  {
+    id: "s19",
+    title: "散场练习",
+    artist: "POPO Radio",
+    emotion: "breakup",
+    lyrics: ["告别不是关门，是慢慢退场", "我把你的名字放回人海", "有些拥抱只适合留在昨天"],
+  },
+  {
+    id: "s20",
+    title: "旧照片显影",
+    artist: "POPO Radio",
+    emotion: "nostalgia",
+    lyrics: ["回忆在暗房里慢慢显影", "那年夏天还亮在相纸背面", "旧歌一响，时间就坐回身边"],
+  },
+  {
+    id: "s21",
+    title: "地铁末班",
+    artist: "POPO Radio",
+    emotion: "solitude",
+    lyrics: ["末班车载着没说出口的话", "站台空得像一段省略号", "我在人群散去后才听见自己"],
+  },
+  {
+    id: "s22",
+    title: "雨天撤回",
+    artist: "POPO Radio",
+    emotion: "emo",
+    lyrics: ["雨把我刚发出的勇敢撤回", "窗外很吵，心里很安静", "我又开始替沉默找理由"],
+  },
+  {
+    id: "s23",
+    title: "霓虹慢跑",
+    artist: "POPO Radio",
+    emotion: "night",
+    lyrics: ["霓虹在路面慢慢呼吸", "晚风把影子拉得很长", "这座城把秘密藏进招牌背后"],
+  },
+  {
+    id: "s24",
+    title: "柔软模式",
+    artist: "POPO Radio",
+    emotion: "calm",
+    lyrics: ["把今天切换成柔软模式", "不用马上好起来，也没关系", "让安静先替你坐一会儿"],
+  },
+  {
+    id: "s25",
+    title: "便利店月亮",
+    artist: "POPO Radio",
+    emotion: "chill",
+    lyrics: ["便利店的灯像一颗小月亮", "买一罐快乐，冰一点刚好", "生活偶尔也会自动续杯"],
+  },
+  {
+    id: "s26",
+    title: "漂浮信号",
+    artist: "POPO Radio",
+    emotion: "float",
+    lyrics: ["信号很弱，但想念很亮", "我把自己调成飞行模式", "云路过的时候，替我眨了眨眼"],
+  },
+  {
+    id: "s27",
+    title: "退潮以后",
+    artist: "POPO Radio",
+    emotion: "breakup",
+    lyrics: ["退潮以后，沙滩留下答案", "我们只是刚好走到不同天气", "爱过的人，不必每次都赢"],
+  },
+  {
+    id: "s28",
+    title: "录像带夏天",
+    artist: "POPO Radio",
+    emotion: "nostalgia",
+    lyrics: ["夏天在录像带里轻微雪花", "操场的风还停在十七岁", "有些快乐，后来才知道名字"],
+  },
+  {
+    id: "s29",
+    title: "黑胶午后",
+    artist: "POPO Radio",
+    emotion: "chill",
+    lyrics: ["黑胶转着，时间也慢下来", "阳光落在桌角，像一段副歌", "今天适合把心情放松播放"],
+  },
+  {
+    id: "s30",
+    title: "未寄出的海",
+    artist: "POPO Radio",
+    emotion: "float",
+    lyrics: ["我把海写进没寄出的信", "浪花替我保管一半心跳", "漂远一点，也许就能看清"],
+  },
+];
+
+const emotionLabels = {
+  solitude: "孤独",
+  emo: "emo",
+  night: "night",
+  calm: "calm",
+  chill: "chill",
+  breakup: "breakup",
+  float: "float",
+  nostalgia: "nostalgia",
+};
+
+const lyricRefractColors = [
+  "0, 231, 228",
+  "111, 164, 255",
+  "191, 111, 255",
+  "255, 91, 189",
+  "120, 255, 188",
+  "255, 211, 106",
+];
+
+const lyricReplyKickers = [
+  "POPO 抽到一张歌词签",
+  "夜间情绪掉落",
+  "这句可能在找你",
+  "随机播放到你的心情",
+  "一张来自 POPO 的小纸条",
+  "今日情绪补给",
+];
 const baseAngles = [90, 66, 40, 114, 140, 164, 16];
 const baseRotations = [0, 10, 9, -7, -8, -4, 8];
 const orbitRadius = { x: 680, y: 282 };
@@ -228,7 +470,7 @@ function initializePageLoader() {
   const posterPreload = new Image();
   posterPreload.addEventListener("load", () => completeTask("poster"), { once: true });
   posterPreload.addEventListener("error", () => completeTask("poster"), { once: true });
-  posterPreload.src = heroVideo?.poster || "assets/posters/pool.png";
+  posterPreload.src = heroVideo?.poster || "assets/posters/pool.webp";
 
   if (!heroVideo || heroVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
     completeTask("video");
@@ -447,8 +689,8 @@ async function typeLyric(text, { deleteCurrent = false } = {}) {
   lyricTypeCompletedAt = performance.now();
 }
 
-const titleCharCount = splitRevealText(document.querySelector(".hero-title"), 0);
-splitRevealText(document.querySelector(".hero-subtitle"), 260 + titleCharCount * 24);
+const titleCharCount = splitRevealText(document.querySelector(".hero-title"), 0, { step: 42 });
+splitRevealText(document.querySelector(".hero-subtitle"), 260 + titleCharCount * 34);
 
 document.querySelectorAll(".glass-player p, .clue-object strong").forEach((element, index) => {
   splitRevealText(element, index * 32, { step: 24 });
@@ -460,12 +702,26 @@ prepareBlurText(document.querySelector(".clue-center p"), 180, 24);
 replayClueBlurText();
 
 function revealHeroIntro() {
-  heroReveal?.classList.add("is-revealed");
-  heroReveal?.setAttribute("aria-hidden", "false");
+  if (!heroReveal) return;
+
+  heroReveal.classList.remove("is-revealed");
+  void heroReveal.offsetWidth;
+
+  window.requestAnimationFrame(() => {
+    heroReveal.classList.add("is-revealed");
+    heroReveal.setAttribute("aria-hidden", "false");
+  });
 }
 
 revealHeroIntro();
-heroVideo?.play?.().catch(() => {});
+if (heroVideo) {
+  heroVideo.loop = true;
+  heroVideo.addEventListener("ended", () => {
+    heroVideo.currentTime = 0;
+    heroVideo.play?.().catch(() => {});
+  });
+  heroVideo.play?.().catch(() => {});
+}
 
 function revealPhotoScreen() {
   loadPhotoAssets();
@@ -1024,31 +1280,181 @@ function appendConversationMessage(role, text, extraClass = "") {
   return row;
 }
 
-function localPopoReply(text) {
-  const activeKey = clueObjects[activeClueIndex]?.dataset.clue;
-  const clueReplies = {
-    vinyl: "唱针落下的时候，我好像就在旋律的另一面。",
-    headphone: "戴上耳机，也许能听见我靠近的方向。",
-    pool: "水面晃了一下，那可能是我留下的节拍。",
-    city: "霓虹闪过的街角，藏着我经过的影子。",
-    walkman: "按下播放键，旧时光会替我回答你。",
-    cassette: "磁带转动时，别错过夹在噪声里的线索。",
-    speaker: "跟着低频往前走，我可能就在不远处。",
-  };
-
-  if (/(你好|嗨|hello|hi\b)/i.test(text)) return "嗨，我好像在附近听见你了。";
-  if (/(在哪|哪里|位置|where)/i.test(text)) return "跟着正在发光的线索找我吧。";
-  if (/(音乐|歌曲|播放|声音|music|song|play)/i.test(text)) return "试试听听当前物件留下的声音。";
-  if (/(照片|相机|photo|camera)/i.test(text)) return "照片的边缘，也许藏着我经过的时间。";
-  if (/(喜欢|爱|想你|miss|love)/i.test(text)) return "这句话我收到了，先把它藏进这段旋律里。";
-  if (/popo/i.test(text)) return "你叫到我的名字了。再靠近一条线索吧。";
-  if (activeKey && clueReplies[activeKey]) return clueReplies[activeKey];
-
-  const fallbacks = ["我收到你的消息了。", "再靠近一点，也许就能找到我。", "这也是一条新的线索。"];
-  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+function detectLyricsEmotion(text) {
+  if (text.includes("孤独")) return "solitude";
+  if (/emo/i.test(text)) return "emo";
+  if (text.includes("夜")) return "night";
+  if (text.includes("安静")) return "calm";
+  if (text.includes("失恋")) return "breakup";
+  if (/(飘|漂浮|float)/i.test(text)) return "float";
+  if (/(怀旧|从前|以前|nostalgia)/i.test(text)) return "nostalgia";
+  return "chill";
 }
 
-async function replyToConversation(text) {
+function pickRandomLyricCard(emotion) {
+  const emotionalPool = lyricsDatabase.filter((song) => song.emotion === emotion);
+  const pool = emotionalPool.length && Math.random() < 0.78 ? emotionalPool : lyricsDatabase;
+  const song = pool[Math.floor(Math.random() * pool.length)];
+  const line = song.lyrics[Math.floor(Math.random() * song.lyrics.length)];
+  return { ...song, line };
+}
+
+function appendLyricsLanyard(card, detectedEmotion) {
+  if (!lyricsLanyardLayer) return null;
+
+  lyricsLanyardLayer.setAttribute("aria-hidden", "false");
+  const lanyard = document.createElement("article");
+  lanyard.className = "lyrics-lanyard";
+  lanyard.style.setProperty("--lanyard-x", `${20 + Math.random() * 60}vw`);
+  lanyard.style.setProperty("--lanyard-rotate", `${-7 + Math.random() * 14}deg`);
+
+  const strap = document.createElement("span");
+  strap.className = "lyrics-lanyard-strap";
+  strap.setAttribute("aria-hidden", "true");
+
+  const cardBody = document.createElement("div");
+  cardBody.className = "lyrics-lanyard-card";
+  cardBody.style.setProperty(
+    "--refract-rgb",
+    card.refractRgb ?? lyricRefractColors[Math.floor(Math.random() * lyricRefractColors.length)],
+  );
+  cardBody.style.setProperty("--refract-x", `${18 + Math.random() * 64}%`);
+  cardBody.style.setProperty("--refract-y", `${12 + Math.random() * 58}%`);
+  cardBody.style.setProperty("--refract-angle", `${118 + Math.random() * 74}deg`);
+  cardBody.style.setProperty("--refract-cyan", (0.18 + Math.random() * 0.2).toFixed(2));
+  cardBody.style.setProperty("--refract-white", (0.16 + Math.random() * 0.18).toFixed(2));
+
+  const kicker = document.createElement("span");
+  kicker.className = "lyrics-lanyard-kicker";
+  kicker.textContent = lyricReplyKickers[Math.floor(Math.random() * lyricReplyKickers.length)];
+
+  const line = document.createElement("p");
+  line.textContent = card.line;
+
+  const meta = document.createElement("span");
+  meta.className = "lyrics-lanyard-meta";
+  meta.textContent = `${card.title} / ${card.artist}`;
+
+  const tag = document.createElement("span");
+  tag.className = "lyrics-lanyard-tag";
+  tag.textContent = `#${emotionLabels[detectedEmotion] ?? detectedEmotion}`;
+
+  cardBody.append(kicker, line, meta, tag);
+  lanyard.append(strap, cardBody);
+  lyricsLanyardLayer.appendChild(lanyard);
+
+  window.setTimeout(() => lanyard.classList.add("is-leaving"), reducedMotionQuery.matches ? 1600 : 5200);
+  window.setTimeout(() => {
+    lanyard.remove();
+    if (!lyricsLanyardLayer.children.length) lyricsLanyardLayer.setAttribute("aria-hidden", "true");
+  }, reducedMotionQuery.matches ? 1900 : 6100);
+
+  return lanyard;
+}
+
+function maybeTriggerLyricsLanyard(text) {
+  const forceTrigger = text.includes("\u6b4c\u8bcd") || text.includes("\u6b4c") || /lyric|lyrics|song|music/i.test(text);
+  const shouldTrigger = forceTrigger || Math.random() < 0.42;
+  if (!shouldTrigger) return { triggered: false };
+
+  const detectedEmotion = detectLyricsEmotion(text);
+  const card = pickRandomLyricCard(detectedEmotion);
+  const refractRgb = lyricRefractColors[Math.floor(Math.random() * lyricRefractColors.length)];
+  card.refractRgb = refractRgb;
+  const delay = forceTrigger || reducedMotionQuery.matches ? 20 : 380 + Math.random() * 520;
+  window.setTimeout(
+    () => appendLyricsLanyard(card, detectedEmotion),
+    delay,
+  );
+  return { triggered: true, emotion: detectedEmotion, card, refractRgb };
+}
+function pickRandom(items) {
+  return items[Math.floor(Math.random() * items.length)];
+}
+
+function localLyricsTriggerReply(trigger) {
+  const fallback = "我把我的秘密借给你，或是一首歌。";
+  if (!trigger?.card) return fallback;
+  const replies = [
+    "我把我的秘密借给你，或是一首歌。",
+    `我把一首歌借给你：${trigger.card.title}。`,
+    "这句不算答案，算我递给你的一个秘密。",
+    "先别急着解释，我把一首歌放到你手心里。",
+    `POPO 抽到一小段情绪，来自《${trigger.card.title}》。`,
+  ];
+  return pickRandom(replies);
+}
+
+function localPopoReply(text) {
+  const activeKey = clueObjects[activeClueIndex]?.dataset.clue;
+  const emotion = detectLyricsEmotion(text);
+  const topicReplies = {
+    hello: [
+      "我听见你啦。POPO 把信号灯调亮了一点。",
+      "嗨，刚好有一段旋律路过这里。",
+      "你来了，聊天框的霓虹刚刚亮了一下。",
+    ],
+    location: [
+      "别急着找答案，先找发光的线索。POPO 通常藏在声音经过的地方。",
+      "我可能不在地图上，但会在某个物件的回声里出现。",
+      "往正在发光的地方靠近一点，也许就能听见我。",
+    ],
+    music: [
+      "收到，给你切到情绪电台。下一句歌词可能会自己掉下来。",
+      "音乐线索已接入。别眨眼，POPO 喜欢在副歌前出现。",
+      "这句话有节拍，我先把它放进黑胶的内圈。",
+    ],
+    photo: [
+      "照片像时间的截图。你可以去下一屏看看，POPO 也许露过一角。",
+      "有些线索不会说话，只会留在相纸边缘。",
+      "如果画面开始发光，那可能不是滤镜，是 POPO 经过了。",
+    ],
+    affection: [
+      "这句我先替你收好，别让它被夜风吹散。",
+      "喜欢这种东西很轻，但落在聊天框里会发亮。",
+      "POPO 收到一颗心跳，已经放进循环播放。",
+    ],
+  };
+  const clueReplies = {
+    vinyl: ["黑胶这边有一点静电，像有人刚刚把秘密放下。", "唱针落下的时候，线索会比语言先出现。"],
+    headphone: ["耳机里有一条很近的路，适合慢慢靠近。", "把世界调小声一点，POPO 的方向会清楚些。"],
+    pool: ["水面晃了一下，像节拍在提醒你别错过。", "泳池边的光很会撒谎，但 POPO 留下的波纹是真的。"],
+    city: ["霓虹闪过的街角，可能藏着下一段坐标。", "城市太吵了，所以线索会发光给你看。"],
+    walkman: ["旧磁带开始倒转，回忆正在加载。", "按下播放键，过去会替 POPO 说一句话。"],
+    cassette: ["磁带的噪声里有暗号，别急着跳过。", "循环播放不是重复，是某个答案还没被听见。"],
+    speaker: ["低频往前推了一下，像在给你指路。", "音箱亮起时，远处的 POPO 也许刚好回头。"],
+  };
+  const emotionReplies = {
+    solitude: ["孤独信号已识别。今晚不用很热闹，微亮就够了。", "一个人的频率也可以很好听，我在旁边接着。"],
+    emo: ["emo 模式开启。先别急着变好，先让这句话完整落地。", "这条情绪有点暗，但边缘还在发光。"],
+    night: ["夜间频道接通。适合说慢一点，也适合被一句歌词接住。", "夜色会把答案藏起来，但也会把轮廓照出来。"],
+    calm: ["安静模式很好，POPO 会把回复放轻一点。", "收到一阵很平稳的风，适合慢慢找。"],
+    breakup: ["失恋信号有点疼，我先把灯调暗一点。", "有些离开不是结尾，是下一首歌的前奏。"],
+    float: ["漂浮感出现。别急着落地，先在这句里停两秒。", "你现在像一颗轻轻偏航的气泡。"],
+    nostalgia: ["怀旧频道打开了，旧时光会带一点磁带噪声。", "回忆正在倒带，但你不用跟着退回去。"],
+    chill: ["收到。POPO 正在把这句话调成更适合夜里的亮度。", "这条消息有点像随机播放，下一秒可能会抽到好句子。"],
+  };
+  const endings = [
+    "要不要再丢一句关键词给我？",
+    "你也可以试试输入：歌词、夜、孤独、失恋。",
+    "我会继续在这些声音里找 POPO。",
+    "下一条消息，也许会掉出一张歌词卡。",
+  ];
+
+  if (/(你好|嗨|hello|hi\b)/i.test(text)) return pickRandom(topicReplies.hello);
+  if (/(在哪|哪里|位置|where)/i.test(text)) return pickRandom(topicReplies.location);
+  if (/(音乐|歌曲|播放|声音|歌词|music|song|play|lyric)/i.test(text)) return pickRandom(topicReplies.music);
+  if (/(照片|相机|photo|camera)/i.test(text)) return pickRandom(topicReplies.photo);
+  if (/(喜欢|爱|想你|miss|love)/i.test(text)) return pickRandom(topicReplies.affection);
+  if (/popo/i.test(text)) return "你叫到我的名字了。信号变强，线索也近了一点。";
+
+  const pool = [
+    ...(emotionReplies[emotion] ?? emotionReplies.chill),
+    ...(activeKey && clueReplies[activeKey] ? clueReplies[activeKey] : []),
+  ];
+  return `${pickRandom(pool)} ${pickRandom(endings)}`;
+}
+async function replyToConversation(text, lyricsTrigger = null) {
   const token = ++conversationReplyToken;
   const typingRow = appendConversationMessage("popo", "•••", "is-typing");
   await wait(reducedMotionQuery.matches ? 80 : 720 + Math.random() * 480);
@@ -1059,7 +1465,12 @@ async function replyToConversation(text) {
   }
 
   typingRow?.remove();
-  appendConversationMessage("popo", localPopoReply(text));
+  if (lyricsTrigger?.triggered) {
+    const lyricReply = appendConversationMessage("popo", localLyricsTriggerReply(lyricsTrigger), "is-lyric-reply");
+    lyricReply?.style.setProperty("--lyric-reply-rgb", lyricsTrigger.refractRgb ?? "0, 231, 228");
+  } else {
+    appendConversationMessage("popo", localPopoReply(text));
+  }
 }
 
 clueChat?.addEventListener("submit", (event) => {
@@ -1074,8 +1485,9 @@ clueChat?.addEventListener("submit", (event) => {
     () => appendConversationMessage("user", text),
     reducedMotionQuery.matches ? 0 : 80,
   );
+  const lyricsTrigger = maybeTriggerLyricsLanyard(text);
   window.setTimeout(
-    () => replyToConversation(text),
+    () => replyToConversation(text, lyricsTrigger),
     reducedMotionQuery.matches ? 10 : 260,
   );
   clueChat.classList.remove("is-sending");
